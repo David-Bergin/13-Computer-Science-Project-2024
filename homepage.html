@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
+<link href="/static/style.css" rel="stylesheet" />
+
+<style>
+  .container {
+    position: relative; /* allow for the container to be created under a positioning context */
+    width: 100px; /* width of container */
+    height: 150px; /* height of container */
+  }
+
+  .image {
+    position: absolute; /* makes it so that the image will always be positioned inside the container */
+    top: 0px; /* top position is '0' so it is at the very top of the site */
+    left: 0px; /* left position is '0' so that the image is at the very left of the homepage and paired with the top is at the top left corner as was planned and approved by my client */
+  }
+</style>
+<div class="container"> <!-- Container with the class 'container' that holds the image -->
+  <img class="image" src="Static/images/CramBerry Final Logo Design With Text.png" alt="CramBerry" width="100" height="150"> <!-- image called and its deimensions specified -->
+</div>
+</style>
+
+<!-- Table -->
 <style>
   table, th, td {
     border: 1px solid rgb(37, 162, 235);
     table-layout: auto;
     width: 180px
+    
  }
 </style>
 
@@ -23,16 +45,7 @@
     <td> </td>
   </tr>
 
-
-
-</table>
-
- <!--CramBerry logo--> 
-
- <img src="logo here insert" alt="Trulli" width="500" height="333">
-
-
-
+</table> 
 <!-- background: #d8b9eb; -->
 </body>
 </html>
