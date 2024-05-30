@@ -1,4 +1,5 @@
-from bottle import run, route, view, static_file, request
+import sqlite3
+from bottle import route, view, run, debug, template, request, static_file, error, redirect
 
 
 
@@ -10,3 +11,5 @@ def load_static(filepath):
 @view('homepage')
 def index():
     pass
+
+run(host='localhost', port=8080)
