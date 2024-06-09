@@ -38,13 +38,23 @@
         width: 80%;
         max-width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
       }
     
       table, th, td {
         border: 1px solid rgb(37, 162, 235);
-        table-layout: auto;
-    
+        padding: 8px;
+        text-align: center;
+        vertical-align: top; /* ensures contetn aligns to top */ 
       }
+
+      td img {
+        max-width: 100%;
+        max-height: 200px; /* Ensure the image does not exceed the desired height */
+        height: auto;
+        width: auto;
+      }
+
     </style>
   </head>
   <body>
@@ -69,8 +79,8 @@
             <th>Reminders</th>
           </tr>
           <tr style="height: 200px">
-            <td valign="top">
-              <img  alt="Kamar Timetable" /> 
+            <td>
+              <img src="static/images/Screenshot 2024-05-31 154426.png" alt= "timetable screenshot"/> 
             </td>
             <td> </td>
             <td> </td>
