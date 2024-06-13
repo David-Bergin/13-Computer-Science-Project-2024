@@ -16,7 +16,7 @@
         }
 
       .logo_container {
-        position: relative; /* allow for the container to be created under a positioning context */
+        position: fixed; /* allow for the container to be created under a positioning context */
         width: 100px; /* width of container */
         height: 150px; /* height of container */
       }
@@ -45,20 +45,34 @@
         border: 1px solid rgb(37, 162, 235);
         padding: 8px;
         text-align: center;
-        vertical-align: top; /* ensures contetn aligns to top */ 
+        vertical-align: top; /* ensures content aligns to top */ 
       }
 
       td img {
-        max-width: 100%;
-        max-height: 200px; /* Ensure the image does not exceed the desired height */
-        height: auto;
-        width: auto;
+        width: 150px; /* Set the desired width */
+        height: 150px; /* Set the desired height */
+        object-fit: cover; /* Ensures the image covers the specified dimensions */
       }
 
-    </style>
+      .button {
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: rgb(37, 162, 235);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: rgb(26, 138, 201);
+    }
+  </style>
   </head>
   <body>
     <div class="wrapper">
+      <button id="button" class="button" onclick="transformButton()">Welcome, Hannah!</button>
+      
       <div class="logo_container"> <!-- Container with the class 'container' that holds the image -->
         <!-- image called and its deimensions specified -->
         <a href="http://localhost:8080/"> <!-- anchors the button/image to the homepage -->
@@ -68,26 +82,47 @@
         </a>
       </div>
 
-      <!-- Table -->
+    <div class="table_container">
+      <table class="table">
+        <tr>
+          <th>Timetable</th>
+          <th>Calendar</th>
+          <th>To Do</th>
+          <th>Reminders</th>
+        </tr>
+        <tr style="height: 200px">
+          <td>
+            <button>
+              <img src="static/images/Screenshot 2024-06-12 143706.png" alt="Timetable screenshot" />
+            </button>
+          </td>
+          <td> 
+            <button>
+              <img src="static/images/Screenshot 2024-06-12 145250.png" alt="Calendar screenshot" />
+            </button>
+          </td>
+          <td>
+            <button>
+              <img src="static/images/Screenshot 2024-06-12 150026.png" alt="To do screenshot" />
+            </button>
+          </td>
+          <td> 
+            <button>
+              <img src="static/images/Screenshot 2024-06-12 150333.png" alt="Reminders screenshot" />
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-      <div class="table_container">
-        <table class="table">
-          <tr>
-            <th>Timetable</th>
-            <th>Calendar</th>
-            <th>To Do</th>
-            <th>Reminders</th>
-          </tr>
-          <tr style="height: 200px">
-            <td>
-              <img src="static/images/Screenshot 2024-05-31 154426.png" alt= "timetable screenshot"/> 
-            </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
-          </tr>
-        </table> 
-      </div>
+  <script>
+    function transformButton() {
+      let button = document.getElementById('button');
+      button.innerHTML = '<img src="static/images/Screenshot 2024-06-13 114322.png">';
+      button.onclick = null;
+    }
+  </script>
 </body>
 </html>
 
@@ -104,3 +139,37 @@
   bottom: 20px;
   width: 100%
 }-->
+
+<!-- TO USE FOR CSS MAKE TABLES LOOK NICE: <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+</style>
+</head>
+<body>
+
+<h2>Card</h2>
+
+<div class="card">
+  <img src="img_avatar.png" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>John Doe</b></h4> 
+    <p>Architect & Engineer</p> 
+  </div>
+</div>
+
+</body>
+</html> 
+-->
