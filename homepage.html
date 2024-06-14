@@ -116,11 +116,18 @@
     </div>
   </div>
 
+  <!-- Audio element -->
+  <audio id="audio" src="static/images/dream-harp2.mp3"></audio>
+
   <script>
     function transformButton() {
       let button = document.getElementById('button');
       button.innerHTML = '<img src="static/images/Screenshot 2024-06-13 114322.png">';
       button.onclick = null;
+
+       // Play audio when button is clicked
+       let audio = document.getElementById('audio');
+      audio.play();
     }
   </script>
 </body>
