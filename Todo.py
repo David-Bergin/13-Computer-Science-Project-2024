@@ -1,9 +1,6 @@
 import sqlite3
 from bottle import route, view, run, debug, template, request, static_file, error, redirect
 
-@route('/') #calls the homepage tpl folder so the user will be taken to the homepage when the to do list is run
-def index():
-    return template('homepage.tpl')
 
 @route('/todo') #calls the todo page into the code
 def todo_list():
@@ -124,14 +121,6 @@ def mistake403(code):
     message = 'There is a mistake in your url!' 
     return template('message', message=message) 
 
-@error(404)
-def mistake404(code):
-    message = 'Sorry, this page does not exist!'
-    return template('message', message=message)
-
-@route('/static/<filepath:path>')
-def load_static(filepath):
-    return static_file(filepath, root='./static') 
 
 debug(True)
 run(reloader=True)

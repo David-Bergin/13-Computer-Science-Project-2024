@@ -10,6 +10,5 @@
   <br>
   <input type="submit" name="save" value="save">
 </form>
-%rebase layout title='Edit Task'
 
 

@@ -5,4 +5,3 @@
   <br>
   <input type="submit" name="edit" value="edit">
 </form>
-%rebase layout title='Edit option'

@@ -15,5 +15,5 @@
   %end
 </table>
 
-%rebase layout title='Make Table'
+
 
