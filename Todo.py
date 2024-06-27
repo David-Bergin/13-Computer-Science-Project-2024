@@ -120,7 +120,3 @@ def show_json(json):
 def mistake403(code):
     message = 'There is a mistake in your url!' 
     return template('message', message=message) 
-
-
-debug(True)
-run(reloader=True)

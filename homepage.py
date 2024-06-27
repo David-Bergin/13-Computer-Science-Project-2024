@@ -1,15 +1,17 @@
 import sqlite3
-from bottle import route, view, run, debug, template, request, static_file, error, redirect
+from bottle import route, run, template, static_file
 import Todo
 
 @route('/static/<filepath:path>')
 def load_static(filepath):
     return static_file(filepath, root='./static')
 
+# homepage route
 @route('/')
 def index():
     return static_file("homepage.html", root='./')
 
+#Route to display todo list
 @route('/todo') #calls the todo page into the code
 def todo_list():
     conn = sqlite3.connect('todo.db')
