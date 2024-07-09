@@ -7,15 +7,14 @@
     <td>
       <h3>To do</h3>
       <table border="1" class="center">
-
         %for row in rows_todo:
-          <tr>
-            %for col in row:
-              <td>{{col}}</td>
-            %end
-          <td><a href="edit/{{row[0]}}">
-                <button class="myButton">Edit</button>
-          </a></td>
+          <tr>            
+              <td>
+                <a href="edit/{{row[0]}}">
+                  {{row[1]}}                
+                </a>
+              </td>
+          </tr>
         %end
       </table>
     </td>
@@ -24,13 +23,13 @@
       <table border="1" class="center">
 
         %for row in rows_doing:
-          <tr>
-            %for col in row:
-              <td>{{col}}</td>
-            %end
-          <td><a href="edit/{{row[0]}}">
-                <button class="myButton">Edit</button>
-          </a></td>
+         <tr>            
+              <td>
+                <a href="edit/{{row[0]}}">
+                  {{row[1]}}                
+                </a>
+              </td>
+          </tr>
         %end
       </table>
     </td>
@@ -39,13 +38,13 @@
       <table border="1" class="center">
 
         %for row in rows_done:
-          <tr>
-            %for col in row:
-              <td>{{col}}</td>
-            %end
-          <td><a href="edit/{{row[0]}}">
-                <button class="myButton">Edit</button>
-          </a></td>
+          <tr>            
+              <td>
+                <a href="edit/{{row[0]}}">
+                  {{row[1]}}                
+                </a>
+              </td>
+          </tr>
         %end
       </table>
     </td>
