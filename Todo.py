@@ -1,6 +1,7 @@
 import sqlite3
-from bottle import route, view, run, debug, template, request, static_file, error, redirect
+from bottle import route, view, run, debug, template, request, static_file, error, redirect, TEMPLATE_PATH
 
+TEMPLATE_PATH.insert(0, 'templates') #putting the templates in their own folder
 
 @route('/todo') #calls the todo page into the code
 def todo_list():
@@ -9,7 +10,7 @@ def todo_list():
     c.execute("SELECT id, task FROM todo WHERE status LIKE '1'")
     result = c.fetchall()
     c.close()
-    output = template('make_table', rows=result)
+    output = template('layout',title="Todo",content=template('make_table', rows=result))
     return output
 #GET method to check the ID and the task so that its status can be updated
 @route('/todo/<no:int>', method='GET')
@@ -25,7 +26,7 @@ def todo_list(no):
     
     result = c.fetchall()
     c.close()
-    output = template('make_table', rows=result)
+    output = template('layout',title="Todo",content=template('make_table', rows=result))    
     return output
 
 #/new route allows user to create a new task and have it updated in the todo list with the help of c.execute command
@@ -42,11 +43,10 @@ def new_item():
         conn.commit()
         c.close()
 
-        message = 'A New Task has been entered. Good luck completing it!' # nessage variable created
-        return template('message', message=message) # return the message template with the message variable
-    
+        message = 'A New Task has been entered. Good luck completing it!' # nessage variable created        
+        return template('layout',title="New todo",content=template('message', message=message)) # return the message template with the message variable
     else:
-        return template('new_task.tpl')
+        return template('layout',title="New todo",content=template('new_task.tpl'))
 
 #edit page and various if statements to allow user to update tasks and see the updates
 @route('/edit/<no:int>', method='GET')
@@ -67,7 +67,7 @@ def edit_item(no):
         conn.commit()
 
         message = 'The item number %s was successfully updated' % no
-        return template('message', message=message)
+        return template('layout',title="Edit todo",content=template('message', message=message))
         
     else:
         conn = sqlite3.connect('todo.db')
@@ -75,7 +75,7 @@ def edit_item(no):
         c.execute("SELECT task FROM todo WHERE id LIKE ?", ([str(no)]) ) 
         cur_data = c.fetchone()
 
-        return template('edit_task', old=cur_data, no=no)
+        return template('layout',title="Edit task",content=template('edit_task', old=cur_data, no=no))
 
 #error messages and selcting tasks from ID
 @route('/item<item:re:[0-9]+>')
@@ -92,7 +92,7 @@ def show_item(item):
         else:
             message = 'Task: %s' % result[0]
         
-        return template('message', message=message)
+        return template('layout',title="Todo",content=template('message', message=message))
 
 
 @route('/help')
@@ -119,4 +119,5 @@ def show_json(json):
 @error(403)
 def mistake403(code):
     message = 'There is a mistake in your url!' 
-    return template('message', message=message) 
+    return template('layout',title="Error!",content=template('message', message=message))
+

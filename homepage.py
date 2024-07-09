@@ -154,15 +154,4 @@ def kamar():
 def index():
     return static_file("homepage.html", root='./')
 
-#Route to display todo list
-@route('/todo') #calls the todo page into the code
-def todo_list():
-    conn = sqlite3.connect('todo.db')
-    c = conn.cursor()
-    c.execute("SELECT id, task FROM todo WHERE status LIKE '1'")
-    result = c.fetchall()
-    c.close()
-    output = template('make_table', rows=result)
-    return output
-
 run(host='localhost', port=8080, reloader = True)

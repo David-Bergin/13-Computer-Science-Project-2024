@@ -3,7 +3,7 @@
     <head>
         <title>{{title or 'No title'}}</title>
         <!--brings the stylesheet into the html -->
-        <link href="/static/style.css" rel="stylesheet" /> 
+        <link href="/static/homepage.css" rel="stylesheet" />         
     </head>
     <body>
         <table id="TableMenu" border="1">
@@ -13,7 +13,7 @@
             </tr>
         </table>
         
-        %include
+        {{!content}}
     
     </body>
 </html>
