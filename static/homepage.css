@@ -1,0 +1,78 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distributes space between items */
+    height: 100%;
+}
+
+.logo_container {
+    position: fixed;
+    /* allow for the container to be created under a positioning context */
+    width: 100px;
+    /* width of container */
+    height: 150px;
+    /* height of container */
+}
+
+.image {
+    position: absolute;
+    /* makes it so that the image will always be positioned inside the container */
+    top: 0;
+    /* top position is '0' so it is at the very top of the site */
+    left: 0;
+    /* left position is '0' so that the image is at the very left of the homepage and paired with the top is at the top left corner as was planned and approved by my client */
+}
+
+.table_container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.table {
+    width: 80%;
+    max-width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table,
+th,
+td {
+    border: 1px solid rgb(37, 162, 235);
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+    /* ensures content aligns to top */
+}
+
+td img {
+    width: 150px;
+    /* Set the desired width */
+    height: 150px;
+    /* Set the desired height */
+    object-fit: cover;
+    /* Ensures the image covers the specified dimensions */
+}
+
+.button {
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgb(37, 162, 235);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(26, 138, 201);
+}
