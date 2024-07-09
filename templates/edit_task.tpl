@@ -4,8 +4,9 @@
 <form action="/edit/{{no}}" method="get">
   <input type="text" name="task" value="{{old[0]}}" size="100" maxlength="100">
   <select name="status">
-    <option>Todo</option> 
-    <option>Done</option> 
+    <option value="1">Todo</option> 
+    <option value="2">Doing</option>
+    <option value="0">Done</option> 
   </select>
   <br>
   <input type="submit" name="save" value="save">

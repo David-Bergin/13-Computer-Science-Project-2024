@@ -8,9 +8,13 @@ def todo_list():
     conn = sqlite3.connect('todo.db')
     c = conn.cursor()
     c.execute("SELECT id, task FROM todo WHERE status LIKE '1'")
-    result = c.fetchall()
+    result_todo = c.fetchall()
+    c.execute("SELECT id, task FROM todo WHERE status LIKE '2'")
+    result_doing = c.fetchall()
+    c.execute("SELECT id, task FROM todo WHERE status LIKE '0'")
+    result_done = c.fetchall()
     c.close()
-    output = template('layout',title="Todo",content=template('make_table', rows=result))
+    output = template('layout',title="Todo",content=template('make_table', rows_todo=result_todo,rows_doing=result_doing,rows_done=result_done))
     return output
 #GET method to check the ID and the task so that its status can be updated
 @route('/todo/<no:int>', method='GET')
@@ -55,11 +59,6 @@ def edit_item(no):
     if request.GET.save:
         edit = request.GET.task.strip()
         status = request.GET.status.strip()
-
-        if status == 'Todo':
-            status = 1
-        else:
-            status = 0
 
         conn = sqlite3.connect('todo.db')
         c = conn.cursor()
