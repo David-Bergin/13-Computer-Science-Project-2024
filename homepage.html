@@ -32,11 +32,15 @@
         </tr>
         <tr>
           <td>
+            <a href="https://portal.baradene.school.nz/index.php/calendar">
               <span class="material-icons" style="font-size: 100px !important;" alt="Calendar">calendar_month</span>
+            </a>
           </td>
           <td>
             <h3>Calendar</h3>
-            {{events}}
+            %for event in events:
+            Tomorrow you have<br/>
+            {{event['summary']}}            
           </td>
         </tr>
         <tr>

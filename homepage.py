@@ -4,14 +4,19 @@ import requests #used for making API calls
 import xml.etree.ElementTree as ET #search through the API data from Kamar
 from datetime import datetime, timedelta #used for getting tomorrow's date
 import Todo
+from icalendar import Calendar #to work with ics file
+import os
 
 TEMPLATE_PATH.insert(0, 'templates') #putting the templates in their own folder
 
 #from Postman user id and key for kamar API
-kamar_id = '18115'
-kamar_key = 'SdIJkcnrONoOhrcZGOsmO3ncpMDlX92x'     
+#kamar_id = '18115' #my ID for testing
+kamar_id = '23232' #user ID
+#kamar_key = 'SdIJkcnrONoOhrcZGOsmO3ncpMDlX92x' #my key for testing
+kamar_key = 'PNcPJcJ7ODYOF793FNRqIMhcPMNkpDlW' #user key
 #api info
-kamar_api_url = 'https://sacredheart.parents.school.nz/api/api.php'
+#kamar_api_url = 'https://sacredheart.parents.school.nz/api/api.php' #my school for testing
+kamar_api_url = 'https://portal.baradene.school.nz/api/api.php' #user school
 #API headers sourced from Postman
 kamar_headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -19,6 +24,8 @@ kamar_headers = {
     'Origin': 'file://',
     'X-Requested-With':'nz.co.KAMAR'
 }
+#kamar_ics_file = 'https://sacredheart.parents.school.nz/ics/school.ics' #my school for testing
+kamar_ics_file = 'https://portal.baradene.school.nz/index.php/ics/school.ics' 
 
 #return data from kamar API about timetable in a function so we can access it multiple times
 def gettimetable():
@@ -227,11 +234,60 @@ def kamar():
         period1_subject, period1_teacher, period1_room = translateperiod(period1)        
         
         #get events from the calendar for tomorrow if there are any
-        tomorrow_events = kamar_calendar_xml.find(f".//Day[Date='{tomorrow_date}']/Status").text                
-        if tomorrow_events:
-            tomorrow_events = f"Your calendar says tomorrow is {tomorrow_events}"
-        else:
-            tomorrow_events = "There are no events on your calendar tomorrow"
+        #get ICS file and getting tomorrow events from it        
+        try:
+            #save the ICS file if not there
+            ics_file = 'calendar.ics'
+            if not os.path.exists(ics_file):                
+                response = requests.post(kamar_ics_file)
+                response.raise_for_status() #raise any problem
+                if response.status_code == 200:
+                    #write the file
+                    with open(ics_file, 'wb') as f:
+                        f.write(response.content)
+            
+            #open the ICS file
+            with open(ics_file,'r') as f:
+                ics_data = f.read()
+
+            #go through the file and add the events into array    
+            kamar_events = {}
+            kamar_calendar = Calendar.from_ical(ics_data)
+            for item in kamar_calendar.walk():
+                if item.name == "VEVENT":
+                    
+                    summary = item.get('summary')                    
+                    location = item.get('location')   
+                    
+                    #decode the details (found via Google)
+                    if summary:
+                        summary = summary.to_ical().decode('utf-8')
+                    if location:
+                        location = location.to_ical().decode('utf-8')
+                    
+                    #get the start date and format it like timetable
+                    start_date = item.get('dtstart').dt
+                    start_date = start_date.strftime('%Y-%m-%d')                                     
+                    
+                    #if the location is none don't add it to the array
+                    if location is not None:                        
+                        event = {                        
+                            'start_date': start_date,
+                            'summary': summary,
+                            'location': location
+                        }
+                        
+                        #in case of multiple events checking if start date is in the array first
+                        if start_date not in kamar_events:
+                            kamar_events[start_date] = []
+                        kamar_events[start_date].append(event)
+            
+        #if the try fails then display the error            
+        except Exception as e:
+            return f"sorry there was an error:{str(e)}"        
+        
+        #get tomorrow's events and if there is no event create a default event saying there are no events
+        tomorrow_events = kamar_events.get(tomorrow_date,[{'summary':'nothing on your calendar'}])
         
         #pass the data back to kamar page from API to display for user
         data = {
