@@ -55,10 +55,21 @@ def todo_list(no):
     output = template('layout',title="Todo",content=template('make_table', rows=result))    
     return output
 
+@route('/todo/clear', method='GET')
+def todo_clear():
+    conn = sqlite3.connect('todo.db')
+    c = conn.cursor()
+    c.execute("UPDATE todo SET status = 99 WHERE status = 0")    
+    conn.commit()
+    conn.close()
+    message = 'Completed tasks have been cleared'
+    return template('layout',title="Edit todo",content=template('message', message=message))
+    
+
 #/new route allows user to create a new task and have it updated in the todo list with the help of c.execute command
 @route('/new', method='GET')
 def new_item():
-    if 'Save' in request.GET:
+    if request.GET.save:
         new = request.GET.task.strip()
         conn = sqlite3.connect('todo.db')
         c = conn.cursor()
@@ -86,6 +97,7 @@ def edit_item(no):
         c = conn.cursor()
         c.execute("UPDATE todo SET task = ?, status = ? WHERE id LIKE ?", (edit, status, no))
         conn.commit()
+        conn.close()
 
         message = 'The item number %s was successfully updated' % no
         return template('layout',title="Edit todo",content=template('message', message=message))
@@ -95,7 +107,7 @@ def edit_item(no):
         c = conn.cursor()
         c.execute("SELECT task FROM todo WHERE id LIKE ?", ([str(no)]) ) 
         cur_data = c.fetchone()
-
+        conn.close()
         return template('layout',title="Edit task",content=template('edit_task', old=cur_data, no=no))
 
 #error messages and selcting tasks from ID

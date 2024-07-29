@@ -5,7 +5,7 @@
 <table>
   <tr>
     <td class="kanban_column">
-      <h3>To do</h3>
+      <h3>To Do</h3>
       <table class="kanban_table">
         %for row in rows_todo:
           <tr>            
@@ -36,7 +36,12 @@
     <td class="kanban_column">
       <h3>Done</h3>
       <table class="kanban_table">
-
+        %if rows_done:
+          <tr>
+            <td class="kanban">
+              <a class="btn btn-danger" href="todo/clear">
+                  Clear completed tasks
+                </a>
         %for row in rows_done:
           <tr>            
               <td class="kanban">
