@@ -92,6 +92,15 @@ def getdaynum():
     tomorrow_day_number = tomorrow.strftime('%w') #Monday=1, Tuesday=2 etc
     return tomorrow_day_number    
 
+#go and get the reminder data
+def getreminder():
+    conn = sqlite3.connect('reminders.db')
+    c = conn.cursor()
+    c.execute("SELECT reminder FROM reminder")
+    result_reminders = c.fetchone()
+    c.close()
+    return result_reminders[0]
+
 #take original API data a period and return the subject and the teacher and the classroom
 def translateperiod(original):
     
@@ -288,6 +297,9 @@ def kamar():
         #get tomorrow's events and if there is no event create a default event saying there are no events
         tomorrow_events = kamar_events.get(tomorrow_date,[{'summary':'nothing on your calendar'}])
         
+        #get the reminder data and pass that
+        reminder = getreminder()
+
         #pass the data back to kamar page from API to display for user
         data = {
             'student_id':kamar_id,
@@ -295,7 +307,8 @@ def kamar():
             'period1_teacher':period1_teacher,
             'period1_room':period1_room,
             'inspirational_message':'Do or do not, there is no try - Yoda',
-            'events':tomorrow_events
+            'events':tomorrow_events,
+            'reminder':reminder
         }        
     #if the try fails then display the error    
     except Exception as e:

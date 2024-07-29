@@ -3,6 +3,28 @@ from bottle import route, view, run, debug, template, request, static_file, erro
 
 TEMPLATE_PATH.insert(0, 'templates') #putting the templates in their own folder
 
+@route('/reminders') #gets reminders
+def reminders():
+    if request.GET.save:
+        edit = request.GET.reminder.strip()        
+        print(f"Edit is '{edit}'")
+        conn = sqlite3.connect('reminders.db')
+        c = conn.cursor()
+        c.execute("UPDATE reminder SET reminder = ? WHERE id = 1", (edit,))
+        conn.commit()
+
+        message = 'Your reminder was updated'
+        return template('layout_reminder',title="Edit reminder",content=template('message_reminder', message=message))
+        
+    else:
+        conn = sqlite3.connect('reminders.db')
+        c = conn.cursor()
+        c.execute("SELECT reminder FROM reminder")
+        result_reminders = c.fetchone()
+        c.close()
+        return template('layout_reminder',title="Edit reminder",content=template('edit_reminder',reminder=result_reminders))        
+
+
 @route('/todo') #calls the todo page into the code
 def todo_list():
     conn = sqlite3.connect('todo.db')
