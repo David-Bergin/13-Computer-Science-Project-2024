@@ -4,13 +4,13 @@
 
 <table>
   <tr>
-    <td>
+    <td class="kanban_column">
       <h3>To do</h3>
-      <table border="1" class="center">
+      <table class="kanban_table">
         %for row in rows_todo:
           <tr>            
-              <td>
-                <a href="edit/{{row[0]}}">
+              <td class="kanban">
+                <a class="btn btn-outline-primary" href="edit/{{row[0]}}">
                   {{row[1]}}                
                 </a>
               </td>
@@ -18,14 +18,14 @@
         %end
       </table>
     </td>
-    <td>
+    <td class="kanban_column">
       <h3>Doing</h3>
-      <table border="1" class="center">
+      <table class="kanban_table">
 
         %for row in rows_doing:
          <tr>            
-              <td>
-                <a href="edit/{{row[0]}}">
+              <td class="kanban">
+                <a class="btn btn-outline-success" href="edit/{{row[0]}}">
                   {{row[1]}}                
                 </a>
               </td>
@@ -33,14 +33,14 @@
         %end
       </table>
     </td>
-    <td>
+    <td class="kanban_column">
       <h3>Done</h3>
-      <table border="1" class="center">
+      <table class="kanban_table">
 
         %for row in rows_done:
           <tr>            
-              <td>
-                <a href="edit/{{row[0]}}">
+              <td class="kanban">
+                <a class="btn btn-outline-secondary" href="edit/{{row[0]}}">
                   {{row[1]}}                
                 </a>
               </td>

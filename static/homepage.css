@@ -48,7 +48,6 @@ html {
 table,
 th,
 td {
-    border: 1px solid rgb(37, 162, 235);
     padding: 8px;
     text-align: center;
     vertical-align: top;
@@ -76,4 +75,13 @@ td img {
 
 .button:hover {
     background-color: rgb(26, 138, 201);
+}
+
+.kanban_column {
+    width: 33%;
+}
+
+.kanban_table, .kanban a
+{
+    width: 100%;
 }

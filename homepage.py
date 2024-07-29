@@ -189,14 +189,13 @@ def timetable():
                     'period4_room':period4_room,
                     'period5_subject':period5_subject,
                     'period5_teacher':period5_teacher,
-                    'period51_room':period5_room,
+                    'period5_room':period5_room,
                     'period6_subject':period6_subject,
                     'period6_teacher':period6_teacher,
                     'period6_room':period6_room
                 }          
-        print(f"Timetable is {data}")        
-
-     #if the try fails then display the error    
+        
+    #if the try fails then display the error    
     except Exception as e:
         return f"sorry there was an error:{str(e)}"           
     
