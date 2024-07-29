@@ -35,17 +35,16 @@ html {
     display: flex;
     justify-content: center;
     margin: 20px 0;
-    margin-left: 50px;        
+    margin-left: 120px;        
 }
 
-.table {
-    width: 80%;
+.table_todo {
+    width: 100%;
     max-width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
-table,
 th,
 td {
     padding: 8px;

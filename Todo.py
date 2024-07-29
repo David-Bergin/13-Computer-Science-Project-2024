@@ -36,7 +36,7 @@ def todo_list(no):
 #/new route allows user to create a new task and have it updated in the todo list with the help of c.execute command
 @route('/new', method='GET')
 def new_item():
-    if 'save' in request.GET:
+    if 'Save' in request.GET:
         new = request.GET.task.strip()
         conn = sqlite3.connect('todo.db')
         c = conn.cursor()

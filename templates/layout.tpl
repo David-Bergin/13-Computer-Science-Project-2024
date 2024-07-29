@@ -23,11 +23,11 @@
                 </a>
             </div>
             <div class="table_container">
-                <div class="table">
-                    <table id="TableMenu" border="1">
+                <div class="table_todo">
+                    <table id="TableMenu">
                         <tr>
-                            <td class="bordered-cell"><a href="/todo">View Open Items</a></td>
-                            <td class="bordered-cell"><a href="/new">New Task</a></td>
+                            <td class="bordered-cell"><a class="btn btn-primary" href="/todo">View Open Items</a></td>
+                            <td class="bordered-cell"><a class="btn btn-primary" href="/new">New Task</a></td>
                         </tr>
                     </table>
                     
