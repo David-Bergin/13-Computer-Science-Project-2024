@@ -62,7 +62,7 @@ def getcalendar():
    
     #testing if the following commands work and if they don't show the error
     try:
-        #get timetable data from kamar API
+        #get calendar data from kamar API
         response = requests.post(kamar_api_url,headers=kamar_headers,data=kamar_calendar_data)
         response.raise_for_status() #raise any problem
         kamar_calendar_xml = ET.fromstring(response.content)            
